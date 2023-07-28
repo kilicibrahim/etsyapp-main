@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Centered Form</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 40%;
+        }
+        label {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin: 10px 0;
+        }
+        input[type="text"] {
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+        input.small-input {
+            width: 40%;
+        }
+        input.large-input {
+            width: 100%;
+        }
+        input[type="submit"] {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            cursor: pointer;
+            width: 100%;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <form action="/createDraftListing" method="post">
+        <label for="quantity">
+            Quantity:
+            <input type="text" id="quantity" name="quantity" class="small-input" placeholder="999">
+        </label>
+        <label for="title">
+            Title:
+            <input type="text" id="title" name="title" class="large-input" placeholder="Handmade Bracelet">
+        </label>
+        <label for="description">
+            Description:
+            <input type="text" id="description" name="description" class="large-input" placeholder="A beautiful handmade bracelet...">
+        </label>
+        <label for="price">
+            Price:
+            <input type="text" id="price" name="price" class="small-input" placeholder="$ 40.00">
+        </label>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

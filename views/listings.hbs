@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Listings Raşit</title>
+    <style>
+        /* Paste your CSS here */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        th {
+            background-color: orange;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Listing ID</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Price (USD)</th>
+                <th>URL</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each listings}}
+                <tr>
+                    <td>{{this.listing_id}}</td>
+                    <td>{{this.title}}</td>
+                    <td>{{this.description}}</td>
+                    <td>${{divide price.amount price.divisor}}</td>
+                    <td><a href="{{this.url}}">Link</a></td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</body>
+</html>

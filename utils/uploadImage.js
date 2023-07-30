@@ -1,10 +1,10 @@
 //how to use: const uploadImage = require('../utils/uploadImage');
-
+const config = require('../config');
 const axios = require('axios');
 const FormData = require('form-data');
 const fs = require('fs');
 
-const uploadImage = async (shopId, listingId, imagePath) => {
+const uploadImage = async (shopId, listingId, imagePath, accessToken) => {
     const url = `https://openapi.etsy.com/v3/application/shops/${shopId}/listings/${listingId}/images`;
 
     let form = new FormData();
@@ -16,7 +16,7 @@ const uploadImage = async (shopId, listingId, imagePath) => {
         headers: {
             'Content-Type': 'application/json',
             'x-api-key': config.clientID,
-            'Authorization': `Bearer ${req.accessToken}`,
+            'Authorization': `Bearer ${accessToken}`,
             ...form.getHeaders(),
         },
         data: form

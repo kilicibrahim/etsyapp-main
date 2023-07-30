@@ -5,7 +5,9 @@
 </head>
 <body>
     <h1>Upload Listings</h1>
-    <form action="/uploadListings" method="post">
+    <form action="/uploadListing" method="post">
+        <label for="folderId">Folder ID:</label><br>
+        <input type="text" id="folderId" name="folderId" required><br>
         <input type="submit" value="Start Upload">
     </form>
 </body>

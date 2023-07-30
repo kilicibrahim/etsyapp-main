@@ -26,19 +26,18 @@ const getDraftListingIds = async (req) => {
     }
 };
 
-const postDraftListing = async (listingDetails) => {
+const postDraftListing = async (access_token, listingDetails, res) => {
 
     const requestOptions = getRequestOptionsForPost('POST', {
         'Content-Type': 'application/json',
         'x-api-key': config.clientID,
-        'Authorization': `Bearer ${req.accessToken}`
+        'Authorization': `Bearer ${access_token}`
     }, listingDetails);
     
     try {
         const data = await performRequest(
             `${config.baseURL}v3/application/shops/${config.shopId}/listings`,
              requestOptions, res);
-        res.json(data);
     } catch (err) {
         console.error(err);
         res.status(500).send('Error creating draft listing');

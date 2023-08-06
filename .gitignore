@@ -5,3 +5,5 @@
 /.eslintrc.js
 /full_url.txt
 /code_verifier.txt
+/xlsx
+/excelData.json

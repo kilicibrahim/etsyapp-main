@@ -134,6 +134,11 @@ app.get('/uploadListingForm', (req, res) => {
 app.get('/ListingsForm', (req, res) => {
     res.render("ListingsForm");
 });
+
+app.get('/selectRowsForm', (req, res) => {
+    res.render("selectRowsForm");
+});
+
 // Middlewares
 app.use(express.json()); // for parsing application/json
 app.use(tokenValidation);
@@ -145,6 +150,7 @@ app.use('/getShippingProfiles', routes.getShippingProfiles);
 app.use('/listings', routes.listings);
 app.use('/getSellerTaxonomyNodes', routes.getSellerTaxonomyNodes);
 app.use('/uploadListing', routes.uploadListing);
+app.use('/selectRows', routes.selectRows);
 
 
 const port = process.env.PORT || 3003;

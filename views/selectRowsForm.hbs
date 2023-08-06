@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('#selectRowsForm').on('submit', function(e){
+            e.preventDefault();
+
+            $.ajax({
+                type: 'POST',
+                url: '/selectRows',
+                data: $(this).serialize(),
+                success: function(response){
+                    $('#message').html('<div class="alert alert-success">' + response + '</div>');
+                },
+                error: function(error){
+                    $('#message').html('<div class="alert alert-danger">An error occurred. Please try again.</div>');
+                }
+            });
+        });
+
+    function updateSelectedRowsDisplay() {
+        let displayText = "Selected Rows: ";
+        let rowsSelected = false;
+
+        const individualRowsInput = $("#individualRows").val();
+        const groupedRowsInput = $("#groupedRows").val();
+
+        const individualRows = individualRowsInput ? individualRowsInput.split(',').map(Number).filter(row => !isNaN(row)) : [];
+        const groupedRows = groupedRowsInput ? groupedRowsInput.split(',').map(group => group.split('-').map(Number)) : [];
+
+        // Use a Set to ensure unique rows
+        let uniqueRows = new Set();
+
+        // Add individual rows to the set
+        individualRows.forEach(row => {
+            uniqueRows.add(row);
+        });
+
+        // Add grouped rows to the set
+        groupedRows.forEach(group => {
+            if (group.length === 2 && !isNaN(group[0]) && !isNaN(group[1])) {
+                for (let i = group[0]; i <= group[1]; i++) {
+                    uniqueRows.add(i);
+                }
+            }
+        });
+
+        // Convert the set back to an array and sort it
+        const sortedRows = [...uniqueRows].sort((a, b) => a - b);
+
+        // Construct the display text
+        sortedRows.forEach(row => {
+            displayText += `${row}, `;
+            rowsSelected = true;
+        });
+
+        // Remove the trailing comma and space
+        if (rowsSelected) {
+            displayText = displayText.slice(0, -2);
+        } else {
+            displayText = "No rows selected.";
+        }
+
+        $("#selectedRowsDisplay").text(displayText);
+    }
+   
+    // Attach event listeners to inputs
+    $("#individualRows, #groupedRows").on('input', updateSelectedRowsDisplay);
+});
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Select Rows</title>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h1 class="mb-4">Select Rows</h1>
+                    <form action="/selectRows" method="post" id="selectRowsForm" class="bg-light p-5 rounded shadow">
+                        <div class="mb-3">
+                            <label for="individualRows" class="form-label">Individual Rows (comma separated):</label>
+                            <input type="text" class="form-control" id="individualRows" name="individualRows" placeholder="e.g. 2,5,7">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="groupedRows" class="form-label">Grouped Rows (e.g. 2-5,7-9):</label>
+                            <input type="text" class="form-control" id="groupedRows" name="groupedRows" placeholder="e.g. 2-5,7-9">
+                        </div>
+    
+                        <div id="selectedRowsDisplay" class="mt-3"></div>
+
+                        <button type="submit" class="btn btn-primary w-100">Select Rows</button>
+                    </form>
+            <div id="message" class="mt-3"></div>
+        </div>
+    </div>
+
+</body>
+
+</html>

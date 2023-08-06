@@ -7,4 +7,5 @@ module.exports = {
     getSellerTaxonomyNodes: require('./getSellerTaxonomyNodes'),
     listings: require('./listings'),
     uploadListing: require('./uploadListing'),
+    selectRows: require('./selectRows')
 };

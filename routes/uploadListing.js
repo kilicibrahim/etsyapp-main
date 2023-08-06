@@ -19,7 +19,7 @@ router.post('/', async (req, res) => {
         when_made: 'made_to_order',
         is_supply: 'false',
         state: 'draft',
-        taxonomy_id: 69, //random taxonomy id
+        taxonomy_id: 11165, //random taxonomy id
         shipping_profile_id: config.shippingProfileId
     }; 
     // we could get the specific folder id from the google drive later on this is just test

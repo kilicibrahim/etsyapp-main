@@ -1,6 +1,8 @@
 # Etsy Integration Application
 This application interfaces with the Etsy API to enable creating and managing listings.
 
+This project is in early development stage.
+
 ## Prerequisites
 
 Before you can run this application, you need to have the following setup:
